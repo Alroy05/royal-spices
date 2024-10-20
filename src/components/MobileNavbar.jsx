@@ -7,27 +7,27 @@ const productOptions = [
   {
     title: "Blended Spices",
     items: [
-      <Link to="/frontend/products/achari-masala">Achari Masala</Link>,
-      <Link to="/frontend/products/chole-masala">Chole Masala</Link>,
-      <Link to="/frontend/products/garam-masala">Garam Masala</Link>,
-      <Link to="/frontend/products/tandoori-masala">Tandoori Masala</Link>,
+      <Link to="/products/achari-masala">Achari Masala</Link>,
+      <Link to="/products/chole-masala">Chole Masala</Link>,
+      <Link to="/products/garam-masala">Garam Masala</Link>,
+      <Link to="/products/tandoori-masala">Tandoori Masala</Link>,
     ],
   },
   {
     title: "Grounded Spices",
     items: [
-      <Link to="/frontend/products/turmeric-powder">Turmeric Powder</Link>,
-      <Link to="/frontend/products/red-chili-powder">Red Chili Powder</Link>,
-      <Link to="/frontend/products/coriander-powder">Coriander Powder</Link>,
-      <Link to="/frontend/products/cumin-powder">Cumin Powder</Link>,
+      <Link to="/products/turmeric-powder">Turmeric Powder</Link>,
+      <Link to="/products/red-chili-powder">Red Chili Powder</Link>,
+      <Link to="/products/coriander-powder">Coriander Powder</Link>,
+      <Link to="/products/cumin-powder">Cumin Powder</Link>,
     ],
   },
   {
     title: "Premix",
     items: [
-      <Link to="/frontend/products/biryani-mix">Biryani Mix</Link>,
-      <Link to="/frontend/products/pav-bhaji-mix">Pav Bhaji Mix</Link>,
-      <Link to="/frontend/products/chaat-masala-mix">Chaat Masala Mix</Link>,
+      <Link to="/products/biryani-mix">Biryani Mix</Link>,
+      <Link to="/products/pav-bhaji-mix">Pav Bhaji Mix</Link>,
+      <Link to="/products/chaat-masala-mix">Chaat Masala Mix</Link>,
     ],
   },
 ];
@@ -36,26 +36,26 @@ const recipeOptions = [
   {
     title: "Indian Dishes",
     items: [
-      <Link to="/frontend/recipes/butter-chicken">Butter Chicken</Link>,
-      <Link to="/frontend/recipes/palak-paneer">Palak Paneer</Link>,
-      <Link to="/frontend/recipes/dal-makhani">Dal Makhani</Link>,
-      <Link to="/frontend/recipes/biryani">Biryani</Link>,
+      <Link to="/recipes/butter-chicken">Butter Chicken</Link>,
+      <Link to="/recipes/palak-paneer">Palak Paneer</Link>,
+      <Link to="/recipes/dal-makhani">Dal Makhani</Link>,
+      <Link to="/recipes/biryani">Biryani</Link>,
     ],
   },
   {
     title: "Global Cuisines",
     items: [
-      <Link to="/frontend/recipes/thai-green-curry">Thai Green Curry</Link>,
-      <Link to="/frontend/recipes/spaghetti-bolognese">Spaghetti Bolognese</Link>,
-      <Link to="/frontend/recipes/sushi-rolls">Sushi Rolls</Link>,
+      <Link to="/recipes/thai-green-curry">Thai Green Curry</Link>,
+      <Link to="/recipes/spaghetti-bolognese">Spaghetti Bolognese</Link>,
+      <Link to="/recipes/sushi-rolls">Sushi Rolls</Link>,
     ],
   },
   {
     title: "Quick Recipes",
     items: [
-      <Link to="/frontend/recipes/quick-omelette">5-Minute Omelette</Link>,
-      <Link to="/frontend/recipes/instant-noodles-upgrade">Instant Noodles Upgrade</Link>,
-      <Link to="/frontend/recipes/microwave-mug-pizza">Microwave Mug Pizza</Link>,
+      <Link to="/recipes/quick-omelette">5-Minute Omelette</Link>,
+      <Link to="/recipes/instant-noodles-upgrade">Instant Noodles Upgrade</Link>,
+      <Link to="/recipes/microwave-mug-pizza">Microwave Mug Pizza</Link>,
     ],
   },
 ];
@@ -118,92 +118,48 @@ const MobileNavbar = () => {
 
   return (
     <div className="flex flex-col bg-[#ffffff] p-4 pt-2 text-sm space-y-4 lg:hidden">
-      <Link to="frontend/about-us">
-        <div className="each-link text-black cursor-pointer">About Us</div>
+      <Link to="/about-us">
+        <div className="each-link text-black cursor-pointer text-left">About Us</div>
       </Link>
 
       <div
-        className={`each-link flex text-black  cursor-pointer ${
+        className={`each-link flex text-black cursor-pointer ${
           isProductsOpen ? "text-green-400" : "text-[#292929]"
         }`}
         onClick={toggleProducts}
       >
-        <div className="">Products</div>
+        <div className="flex-grow text-left">Products</div>
         <div className="ml-1 pt-[4px]">
           {isProductsOpen ? <IoCaretUpOutline /> : <IoCaretDownOutline />}
         </div>
       </div>
       {isProductsOpen && (
         <div className="ml-4">
-          <div
-            className={`each-link flex mb-3 text-black  cursor-pointer ${
-              isBlendedSpicesOpen ? "text-green-400" : "text-[#292929]"
-            }`}
-            onClick={toggleBlendedSpices}
-          > 
-            <div className="icon rounded-full px-1 py-1 font-semibold mr-4 bg-green-400 text-black"></div>
-            <div className="">
-              {productOptions[0].title}
-            </div>
-            <div className="ml-1 pt-[4px]">
-              {isBlendedSpicesOpen ? <IoCaretUpOutline /> : <IoCaretDownOutline />}
-            </div>
-          </div>
-          {isBlendedSpicesOpen && (
-            <div className="ml-4">
-              {productOptions[0].items.map((option, index) => (
-                <div key={index} className="each-link text-black  mb-3 cursor-pointer">
-                  {option}
+          {productOptions.map((category, categoryIndex) => (
+            <div key={categoryIndex}>
+              <div
+                className={`each-link flex mb-3 text-black cursor-pointer ${
+                  [isBlendedSpicesOpen, isGroundedSpicesOpen, isPremixOpen][categoryIndex] ? "text-green-400" : "text-[#292929]"
+                }`}
+                onClick={[toggleBlendedSpices, toggleGroundedSpices, togglePremix][categoryIndex]}
+              > 
+                <div className="icon rounded-full px-1 py-1 font-semibold mr-4 bg-green-400 text-black"></div>
+                <div className="flex-grow text-left">{category.title}</div>
+                <div className="ml-1 pt-[4px]">
+                  {[isBlendedSpicesOpen, isGroundedSpicesOpen, isPremixOpen][categoryIndex] ? <IoCaretUpOutline /> : <IoCaretDownOutline />}
                 </div>
-              ))}
-            </div>
-          )}
-          <div
-            className={`each-link flex mb-3 text-black  cursor-pointer ${
-              isGroundedSpicesOpen ? "text-green-400" : "text-[#292929]"
-            }`}
-            onClick={toggleGroundedSpices}
-          >
-            <div className="icon rounded-full text-black  px-1 py-1 font-semibold mr-4 bg-green-400"></div>
-            <div className="">
-              {productOptions[1].title}
-            </div>
-            <div className="ml-1 pt-[4px]">
-              {isGroundedSpicesOpen ? <IoCaretUpOutline /> : <IoCaretDownOutline />}
-            </div>
-          </div>
-          {isGroundedSpicesOpen && (
-            <div className="ml-4">
-              {productOptions[1].items.map((option, index) => (
-                <div key={index} className="each-link mb-3 text-black  cursor-pointer">
-                  {option}
+              </div>
+              {[isBlendedSpicesOpen, isGroundedSpicesOpen, isPremixOpen][categoryIndex] && (
+                <div className="ml-4">
+                  {category.items.map((option, index) => (
+                    <div key={index} className="each-link text-black mb-3 cursor-pointer text-left">
+                      {option}
+                    </div>
+                  ))}
                 </div>
-              ))}
+              )}
             </div>
-          )}
-          <div
-            className={`each-link flex mb-3 text-black  cursor-pointer ${
-              isPremixOpen ? "text-green-400" : "text-[#292929]"
-            }`}
-            onClick={togglePremix}
-          >
-            <div className="icon rounded-full px-1 py-1 font-semibold mr-4 bg-green-400 text-black "></div>
-            <div className="">
-              {productOptions[2].title}
-            </div>
-            <div className="ml-1 pt-[4px]">
-              {isPremixOpen ? <IoCaretUpOutline /> : <IoCaretDownOutline />}
-            </div>
-          </div>
-          {isPremixOpen && (
-            <div className="ml-4">
-              {productOptions[2].items.map((option, index) => (
-                <div key={index} className="each-link mb-3 text-black  cursor-pointer">
-                  {option}
-                </div>
-              ))}
-            </div>
-          )}
+          ))}
         </div>
       )}
       <div
@@ -212,86 +168,42 @@ const MobileNavbar = () => {
         }`}
         onClick={toggleRecipes}
       >
-        Recipes
+        <div className="flex-grow text-left">Recipes</div>
         <div className="ml-1 pt-[4px]">
           {isRecipesOpen ? <IoCaretUpOutline /> : <IoCaretDownOutline />}
         </div>
       </div>
       {isRecipesOpen && (
         <div className="ml-4">
-          <div
-            className={`each-link flex mb-3 text-black  cursor-pointer ${
-              isIndianDishesOpen ? "text-green-400" : "text-[#292929]"
-            }`}
-            onClick={toggleIndianDishes}
-          > 
-            <div className="icon rounded-full px-1 py-1 font-semibold mr-4 bg-green-400 text-white"></div>
-            <div className="">
-              {recipeOptions[0].title}
-            </div>
-            <div className="ml-1 pt-[4px]">
-              {isIndianDishesOpen ? <IoCaretUpOutline /> : <IoCaretDownOutline />}
-            </div>
-          </div>
-          {isIndianDishesOpen && (
-            <div className="ml-4">
-              {recipeOptions[0].items.map((option, index) => (
-                <div key={index} className="each-link mb-3 text-black  cursor-pointer">
-                  {option}
+          {recipeOptions.map((category, categoryIndex) => (
+            <div key={categoryIndex}>
+              <div
+                className={`each-link flex mb-3 text-black cursor-pointer ${
+                  [isIndianDishesOpen, isGlobalCuisinesOpen, isQuickRecipesOpen][categoryIndex] ? "text-green-400" : "text-[#292929]"
+                }`}
+                onClick={[toggleIndianDishes, toggleGlobalCuisines, toggleQuickRecipes][categoryIndex]}
+              > 
+                <div className="icon rounded-full px-1 py-1 font-semibold mr-4 bg-green-400 text-white"></div>
+                <div className="flex-grow text-left">{category.title}</div>
+                <div className="ml-1 pt-[4px]">
+                  {[isIndianDishesOpen, isGlobalCuisinesOpen, isQuickRecipesOpen][categoryIndex] ? <IoCaretUpOutline /> : <IoCaretDownOutline />}
                 </div>
-              ))}
-            </div>
-          )}
-          <div
-            className={`each-link flex mb-3 cursor-pointer ${
-              isGlobalCuisinesOpen ? "text-green-400" : "text-[#292929]"
-            }`}
-            onClick={toggleGlobalCuisines}
-          >
-            <div className="icon rounded-full px-1 py-1 font-semibold mr-4 bg-green-400 text-white"></div>
-            <div className="">
-              {recipeOptions[1].title}
-            </div>
-            <div className="ml-1 pt-[4px]">
-              {isGlobalCuisinesOpen ? <IoCaretUpOutline /> : <IoCaretDownOutline />}
-            </div>
-          </div>
-          {isGlobalCuisinesOpen && (
-            <div className="ml-4">
-              {recipeOptions[1].items.map((option, index) => (
-                <div key={index} className="each-link text-black  mb-3 cursor-pointer">
-                  {option}
+              </div>
+              {[isIndianDishesOpen, isGlobalCuisinesOpen, isQuickRecipesOpen][categoryIndex] && (
+                <div className="ml-4">
+                  {category.items.map((option, index) => (
+                    <div key={index} className="each-link text-black mb-3 cursor-pointer text-left">
+                      {option}
+                    </div>
+                  ))}
                 </div>
-              ))}
+              )}
             </div>
-          )}
-          <div
-            className={`each-link flex mb-3 cursor-pointer ${
-              isQuickRecipesOpen ? "text-green-400" : "text-[#292929]"
-            }`}
-            onClick={toggleQuickRecipes}
-          >
-            <div className="icon rounded-full px-1 py-1 font-semibold mr-4 bg-green-400 text-white"></div>
-            <div className="">
-              {recipeOptions[2].title}
-            </div>
-            <div className="ml-1 pt-[4px]">
-              {isQuickRecipesOpen ? <IoCaretUpOutline /> : <IoCaretDownOutline />}
-            </div>
-          </div>
-          {isQuickRecipesOpen && (
-            <div className="ml-4">
-              {recipeOptions[2].items.map((option, index) => (
-                <div key={index} className="each-link text-black  mb-3 cursor-pointer">
-                  {option}
-                </div>
-              ))}
-            </div>
-          )}
+          ))}
         </div>
       )}
-      <Link to="frontend/contact-us">
-        <div className="each-link mb-3 text-black  cursor-pointer">Contact Us</div>
+      <Link to="/contact-us">
+        <div className="each-link mb-3 text-black cursor-pointer text-left">Contact Us</div>
       </Link>
     </div>
   );
