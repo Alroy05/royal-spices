@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 const products = [
@@ -6,61 +6,92 @@ const products = [
     id: 1,
     name: 'Turmeric',
     description: 'A vibrant spice known for its anti-inflammatory properties.',
-    image: 'https://img.pikbest.com/wp/202343/beautifully-indian-spices-arranged-cumin-seeds-on-a-textured-white-background_9981193.jpg!w700wp'
+    image: 'https://tildaricelive.s3.eu-central-1.amazonaws.com/wp-content/uploads/sites/21/2022/01/26111346/Tumeric-1-min.jpg'
   },
   {
     id: 2,
     name: 'Cumin',
     description: 'A spice with a warm, earthy flavor perfect for savory dishes.',
-    image: 'https://img.pikbest.com/wp/202343/beautifully-indian-spices-arranged-cumin-seeds-on-a-textured-white-background_9981193.jpg!w700wp'
+    image: 'https://cdn.britannica.com/59/219359-050-662D86EA/Cumin-Spice.jpg'
   },
   {
     id: 3,
     name: 'Coriander',
     description: 'A fresh and citrusy spice used in various global cuisines.',
-    image: 'https://img.pikbest.com/wp/202343/beautifully-indian-spices-arranged-cumin-seeds-on-a-textured-white-background_9981193.jpg!w700wp'
+    image: 'https://m.media-amazon.com/images/I/41oCRXEnZQL._AC_UF1000,1000_QL80_.jpg'
   },
   {
     id: 4,
     name: 'Clove',
     description: 'A strong, pungent spice with a sweet aftertaste.',
-    image: 'https://img.pikbest.com/wp/202343/beautifully-indian-spices-arranged-cumin-seeds-on-a-textured-white-background_9981193.jpg!w700wp'
+    image: 'https://cdn.britannica.com/27/171027-050-7F7889C9/flower-buds-clove-tree.jpg'
   },
   {
     id: 5,
     name: 'Cardamom',
     description: 'A sweet, aromatic spice used in both sweet and savory dishes.',
-    image: 'https://img.pikbest.com/wp/202343/beautifully-indian-spices-arranged-cumin-seeds-on-a-textured-white-background_9981193.jpg!w700wp'
+    image: 'https://5.imimg.com/data5/SELLER/Default/2021/11/LS/HX/PE/140961756/cardamon.jpg'
   },
   {
     id: 6,
     name: 'Black Pepper',
     description: 'A spicy, bold pepper perfect for adding heat to any dish.',
-    image: 'https://img.pikbest.com/wp/202343/beautifully-indian-spices-arranged-cumin-seeds-on-a-textured-white-background_9981193.jpg!w700wp'
+    image: 'https://cdn.shopaccino.com/edible-smart/products/black-pepper--kali-mirch-379942_l.jpg?v=521'
   },
   {
     id: 7,
     name: 'Fenugreek',
     description: 'A slightly bitter spice with a maple-like flavor.',
-    image: 'https://img.pikbest.com/wp/202343/beautifully-indian-spices-arranged-cumin-seeds-on-a-textured-white-background_9981193.jpg!w700wp'
+    image: 'https://organicbazar.net/cdn/shop/products/Untitled-design-2022-06-02T160309.044.jpg?v=1694167783'
   },
   {
     id: 8,
     name: 'Mustard Seeds',
     description: 'Small seeds that add a warm, nutty flavor to dishes.',
-    image: 'https://img.pikbest.com/wp/202343/beautifully-indian-spices-arranged-cumin-seeds-on-a-textured-white-background_9981193.jpg!w700wp'
+    image: 'https://m.media-amazon.com/images/I/71+MmuGNG-L._AC_UF1000,1000_QL80_.jpg'
   }
 ];
 
 const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoScroll, setIsAutoScroll] = useState(false);
+  const containerRef = useRef(null);
+  const [cardWidth, setCardWidth] = useState(0);
+
+  // Calculate the width of each card
+  useEffect(() => {
+    if (containerRef.current) {
+      const width = containerRef.current.clientWidth / 4; // Assuming 4 items per view in larger screens
+      setCardWidth(width);
+    }
+  }, [containerRef]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 5000);
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsAutoScroll(true); // Auto-scroll on larger screens (e.g., tablets and desktops)
+      } else {
+        setIsAutoScroll(false); // No auto-scroll on mobile
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    let interval;
+    if (isAutoScroll) {
+      interval = setInterval(() => {
+        nextSlide();
+      }, 2500); // Auto-scroll every 2.5 seconds
+    }
     return () => clearInterval(interval);
-  }, [currentIndex]);
+  }, [isAutoScroll, currentIndex]);
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % products.length);
@@ -68,10 +99,6 @@ const Carousel = () => {
 
   const prevSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + products.length) % products.length);
-  };
-
-  const getVisibleProducts = () => {
-    return [...products, ...products.slice(0, 3)];
   };
 
   return (
@@ -88,11 +115,12 @@ const Carousel = () => {
 
         <div className="relative overflow-hidden">
           <motion.div
+            ref={containerRef} // Reference for the container
             className="flex"
-            animate={{ x: `${-currentIndex * 25}%` }}
+            animate={{ x: `${-currentIndex * cardWidth}px` }} // Slide by card width
             transition={{ type: 'tween', ease: 'linear', duration: 0.5 }}
           >
-            {getVisibleProducts().map((product, index) => (
+            {products.map((product, index) => (
               <div 
                 key={`${product.id}-${index}`}
                 className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 flex-shrink-0 px-2"
@@ -115,6 +143,7 @@ const Carousel = () => {
             ))}
           </motion.div>
 
+          {/* Arrows */}
           <button
             onClick={prevSlide}
             className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors z-10"

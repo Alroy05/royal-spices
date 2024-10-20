@@ -15,7 +15,7 @@ const spicesData = {
   },
   "chole-masala": {
     title: "Chole Masala: The Chickpea Spice Blend",
-    image: "https://www.cookwithmanali.com/wp-content/uploads/2020/08/Chole-Masala.jpg",
+    image: "https://i.ytimg.com/vi/qcDAv_wmesQ/maxresdefault.jpg",
     description: `
       Chole Masala is the perfect spice blend for making Chole, a popular North Indian chickpea curry. It brings warmth and richness to the dish.
     `,
@@ -26,7 +26,7 @@ const spicesData = {
   },
   "garam-masala": {
     title: "Garam Masala: The Warm Spice Mix",
-    image: "https://www.cookwithmanali.com/wp-content/uploads/2020/08/Garam-Masala.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Garammasalaphoto.jpg/1200px-Garammasalaphoto.jpg",
     description: `
       Garam Masala is a blend of ground spices, originating from South Asia, that is widely used in Indian cooking. It provides a warm, aromatic touch to curries.
     `,
@@ -37,7 +37,7 @@ const spicesData = {
   },
   "tandoori-masala": {
     title: "Tandoori Masala: The BBQ Spice Blend",
-    image: "https://www.cookwithmanali.com/wp-content/uploads/2020/08/Tandoori-Masala.jpg",
+    image: "https://mongoliankitchen.com/wp-content/uploads/2011/08/MK-3540.jpg",
     description: `
       Tandoori Masala is a spice blend used primarily to marinate meats for tandoori dishes. It's known for its smoky flavor and vibrant red color.
     `,

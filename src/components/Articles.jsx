@@ -21,17 +21,17 @@ const Articles = () => {
   return (
     <>
       <div className='mt-20'></div>
-      <div className="bg-white w-full flex flex-col gap-5 px-3 md:px-16 lg:px-28 md:flex-row">
+      <div className="bg-white font-playfairDisplay w-full flex flex-col gap-5 px-3 md:px-16 lg:px-28 md:flex-row">
         {/* sticky sidebar */}
         <aside className="hidden md:w-1/3 lg:w-1/4 md:block h-screen sticky top-20">
           <div className="flex flex-col gap-2 p-2 border rounded-xl overflow-y-auto">
-            <Link to="/" className="items-center px-3 py-1 font-semibold hover:bg-indigo-50 rounded-md">
+            <Link to="/" className="items-center px-3 py-1 font-semibold hover:bg-green-100 rounded-md">
               Home
             </Link>
             <div className="flex flex-col">
               <button
                 onClick={() => setIsProductsOpen(!isProductsOpen)}
-                className="w-full flex items-center justify-between px-3 py-1 font-semibold hover:bg-indigo-50 rounded-md"
+                className="w-full flex items-center justify-between px-3 py-1 font-semibold hover:bg-green-100 rounded-md"
               >
                 Products
                 {isProductsOpen ? <FaChevronUp size={16} /> : <FaChevronDown size={16} />}
@@ -41,7 +41,7 @@ const Articles = () => {
                   <Link
                     key={index}
                     to={`/products/${product.toLowerCase().replace(' ', '-')}`}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 text-left w-full"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-green-100 text-left w-full rounded-lg"
                   >
                     {product}
                   </Link>
@@ -51,7 +51,7 @@ const Articles = () => {
             <div className="flex flex-col">
               <button
                 onClick={() => setIsRecipesOpen(!isRecipesOpen)}
-                className="w-full flex items-center justify-between px-3 py-1 font-semibold hover:bg-indigo-50 rounded-md"
+                className="w-full flex items-center justify-between px-3 py-1 font-semibold hover:bg-green-100 rounded-lg"
               >
                 Recipes
                 {isRecipesOpen ? <FaChevronUp size={16} /> : <FaChevronDown size={16} />}
@@ -61,7 +61,7 @@ const Articles = () => {
                   <a 
                     key={index} 
                     href="#" 
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 text-left w-full"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-green-100 rounded-lg green-100 text-left w-full"
                   >
                     {recipe}
                   </a>
