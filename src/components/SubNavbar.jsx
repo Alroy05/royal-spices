@@ -26,10 +26,10 @@ const SubNavbar = (props) => {
       id: "blendedSpices",
       title: "Blended Spices",
       items: [
-        ["Achari Masala", "/frontend/products/achari-masala"],
-        ["Chole Masala", "/frontend/products/chole-masala"],
-        ["Garam Masala", "/frontend/products/garam-masala"],
-        ["Tandoori Masala", "/frontend/products/tandoori-masala"],
+        ["Achari Masala", "/products/achari-masala"],
+        ["Chole Masala", "/products/chole-masala"],
+        ["Garam Masala", "/products/garam-masala"],
+        ["Tandoori Masala", "/products/tandoori-masala"],
       ],
       onMouseEnter: () => handleMouseEnter("blendedSpices"),
       onMouseLeave: () => handleMouseLeave("blendedSpices"),
@@ -38,10 +38,10 @@ const SubNavbar = (props) => {
       id: "groundedSpices",
       title: "Grounded Spices",
       items: [
-        ["Turmeric Powder", "/frontend/products/turmeric-powder"],
-        ["Red Chili Powder", "/frontend/products/red-chili-powder"],
-        ["Coriander Powder", "/frontend/products/coriander-powder"],
-        ["Cumin Powder", "/frontend/products/cumin-powder"],
+        ["Turmeric Powder", "/products/turmeric-powder"],
+        ["Red Chili Powder", "/products/red-chili-powder"],
+        ["Coriander Powder", "/products/coriander-powder"],
+        ["Cumin Powder", "/products/cumin-powder"],
       ],
       onMouseEnter: () => handleMouseEnter("groundedSpices"),
       onMouseLeave: () => handleMouseLeave("groundedSpices"),
@@ -50,9 +50,9 @@ const SubNavbar = (props) => {
       id: "premix",
       title: "Premix",
       items: [
-        ["Biryani Mix", "/frontend/products/biryani-mix"],
-        ["Pav Bhaji Mix", "/frontend/products/pav-bhaji-mix"],
-        ["Chaat Masala Mix", "/frontend/products/chaat-masala-mix"],
+        ["Biryani Mix", "/products/biryani-mix"],
+        ["Pav Bhaji Mix", "/products/pav-bhaji-mix"],
+        ["Chaat Masala Mix", "/products/chaat-masala-mix"],
       ],
       onMouseEnter: () => handleMouseEnter("premix"),
       onMouseLeave: () => handleMouseLeave("premix"),
@@ -64,10 +64,10 @@ const SubNavbar = (props) => {
       id: "indianDishes",
       title: "Indian Dishes",
       items: [
-        ["Butter Chicken", "/frontend/recipes/butter-chicken"],
-        ["Palak Paneer", "/frontend/recipes/palak-paneer"],
-        ["Dal Makhani", "/frontend/recipes/dal-makhani"],
-        ["Biryani", "/frontend/recipes/biryani"],
+        ["Butter Chicken", "/recipes/butter-chicken"],
+        ["Palak Paneer", "/recipes/palak-paneer"],
+        ["Dal Makhani", "/recipes/dal-makhani"],
+        ["Biryani", "/recipes/biryani"],
       ],
       onMouseEnter: () => handleMouseEnter("indianDishes"),
       onMouseLeave: () => handleMouseLeave("indianDishes")
@@ -76,9 +76,9 @@ const SubNavbar = (props) => {
       id: "globalCuisines",
       title: "Global Cuisines",
       items: [
-        ["Thai Green Curry", "/frontend/recipes/thai-green-curry"],
-        ["Spaghetti Bolognese", "/frontend/recipes/spaghetti-bolognese"],
-        ["Sushi Rolls", "/frontend/recipes/sushi-rolls"],
+        ["Thai Green Curry", "/recipes/thai-green-curry"],
+        ["Spaghetti Bolognese", "/recipes/spaghetti-bolognese"],
+        ["Sushi Rolls", "/recipes/sushi-rolls"],
       ],
       onMouseEnter: () => handleMouseEnter("globalCuisines"),
       onMouseLeave: () => handleMouseLeave("globalCuisines")
@@ -87,9 +87,9 @@ const SubNavbar = (props) => {
       id: "quickRecipes",
       title: "Quick Recipes",
       items: [
-        ["5-Minute Omelette", "/frontend/recipes/quick-omelette"],
-        ["Instant Noodles Upgrade", "/frontend/recipes/instant-noodles-upgrade"],
-        ["Microwave Mug Pizza", "/frontend/recipes/microwave-mug-pizza"],
+        ["5-Minute Omelette", "/recipes/quick-omelette"],
+        ["Instant Noodles Upgrade", "/recipes/instant-noodles-upgrade"],
+        ["Microwave Mug Pizza", "/recipes/microwave-mug-pizza"],
       ],
       onMouseEnter: () => handleMouseEnter("quickRecipes"),
       onMouseLeave: () => handleMouseLeave("quickRecipes")
@@ -104,6 +104,7 @@ const SubNavbar = (props) => {
         {subnavbarOptions.map((option, index) => (
           <div key={index} className="each-link">
             <Link
+              to={option.items[0][1]}
               className="flex pr-4 hover:no-underline text-[#252525] hover:text-black space-x-6 text-sm font-normal"
               onMouseEnter={option.onMouseEnter}
               onMouseLeave={option.onMouseLeave}

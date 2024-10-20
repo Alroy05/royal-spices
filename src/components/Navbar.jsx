@@ -5,9 +5,9 @@ import SubNavbar from "./SubNavbar";
 import { RiMenu4Fill } from "react-icons/ri";
 import { IoClose } from "react-icons/io5";
 import MobileNavbar from "./MobileNavbar";
-import royalSpiceLogo from "../assets/logo_royal_spices.jpg"
+import royalSpiceLogo from "../assets/logo_royal_spices.jpg";
 
-const Navbar = () => {
+const Navbar = ({ isHomePage }) => {
   const [showProductsDropdown, setShowProductsDropdown] = useState(false);
   const [showRecipesDropdown, setShowRecipesDropdown] = useState(false);
   const [isMobileNavbarOpen, setIsMobileNavbarOpen] = useState(false);
@@ -62,9 +62,11 @@ const Navbar = () => {
     });
   };
 
-  const navbarClass = isScrolled
-    ? "bg-white text-black shadow-sm"
-    : "bg-transparent text-white";
+  const navbarClass = isHomePage
+    ? isScrolled
+      ? "bg-white text-black shadow-sm"
+      : "bg-transparent text-white"
+    : "bg-white text-black shadow-sm";
 
   return (
     <nav className={`font-playfairDisplay top-0 w-full fixed z-50 transition-all duration-300 ${navbarClass}`}>
@@ -72,7 +74,7 @@ const Navbar = () => {
         <div className="max-w-full sm:px-2 lg:px-8">
           <div className="flex items-center justify-center h-16">
             <div className="brand mr-40">
-              <Link to="/frontend/" onClick={scrollToTop}>
+              <Link to="/" onClick={scrollToTop}>
                 <div className="flex justify-center items-center">
                   <p className="ml-2 font-playfairDisplay font-extrabold text-2xl">Royal Spice</p> 
                 </div>
@@ -83,7 +85,7 @@ const Navbar = () => {
                 <div className="ml-10 flex space-x-5 lg:space-x-[57px]">
                   <div className="each-item pt-3">
                     <Link
-                      to="/frontend/about-us"
+                      to="/about-us"
                       onClick={scrollToTop}
                       className="hover:text-green-400 no-underline hover:no-underline cursor-pointer text-md font-normal"
                     >
@@ -92,7 +94,7 @@ const Navbar = () => {
                   </div>
                   <div className="each-item">
                     <Link
-                      to="#"
+                      to="/products/achari-masala"
                       className="flex relative py-3 hover:text-green-400 no-underline hover:no-underline cursor-pointer text-md font-normal"
                       onMouseEnter={handleProductsMouseEnter}
                       onMouseLeave={handleProductsMouseLeave}
@@ -128,7 +130,7 @@ const Navbar = () => {
                   </div>
                   <div className="each-item pt-3">
                     <Link
-                      to="frontend/contact-us"
+                      to="/contact-us"
                       className="hover:text-green-400 no-underline hover:no-underline cursor-pointer text-md font-normal"
                     >
                       Contact Us
@@ -143,9 +145,9 @@ const Navbar = () => {
                 onClick={toggleMobileNavbar}
               >
                 {isMobileNavbarOpen ? (
-                  <IoClose className={isScrolled ? "text-black" : "text-white"} />
+                  <IoClose className={isHomePage && !isScrolled ? "text-white" : "text-black"} />
                 ) : (
-                  <RiMenu4Fill className={`text-2xl ${isScrolled ? "text-green-400" : "text-white"}`} />
+                  <RiMenu4Fill className={`text-2xl ${isHomePage && !isScrolled ? "text-white" : "text-green-400"}`} />
                 )}
               </button>
             </div>
