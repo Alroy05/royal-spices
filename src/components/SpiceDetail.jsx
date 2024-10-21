@@ -2,9 +2,8 @@ import React from 'react';
 
 const SpiceDetail = ({ spice }) => {
   if (!spice) {
-    return <div>Loading...</div>;
+    return <div>Data not available. Please select either Achari Masala, Chole Masala, Garam Masala, or Tandoori Masala.</div>;
   }
-
   return (
     <div className="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16 relative">
       <div className="bg-cover bg-center text-center overflow-hidden" style={{ minHeight: '500px', backgroundImage: `url('${spice.image}')` }} title={`${spice.title} image`}>

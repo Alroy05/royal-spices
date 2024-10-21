@@ -42,7 +42,7 @@ const Recipe = () => {
               Discover a world of flavors with our curated collection of recipes. From quick weeknight dinners to impressive party dishes, we've got something for every occasion. Our step-by-step instructions make cooking a breeze, whether you're a novice or a seasoned chef.
             </p>
             <motion.button
-              className="px-6 py-3 border border-green-950 hover:bg-white hover:text-green-950 font-semibold rounded-full shadow-md bg-green-950 text-white transition-colors duration-300 font-playfairDisplay"
+              className="px-6 py-3 border border-green-950 hover:text-white hover:bg-green-900 font-semibold rounded-full shadow-md bg-green-950 text-white transition-colors duration-300 font-playfairDisplay"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

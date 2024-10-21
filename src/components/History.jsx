@@ -5,7 +5,7 @@ const History = () => {
   const easing = [0.6, -0.05, 0.01, 0.99];
 
   return (
-    <div className="bg-slate-50 flex items-center justify-center py-16 px-4 sm:px-6 lg:px-8 font-playfairDisplay min-h-screen">
+    <div id='aboutus'  className="bg-slate-50 flex items-center justify-center py-16 px-4 sm:px-6 lg:px-8 font-playfairDisplay min-h-screen">
       <div className="max-w-7xl mx-auto w-full">
         <motion.h2 
           className="text-3xl font-extrabold text-green-950 sm:text-4xl text-center mb-12"

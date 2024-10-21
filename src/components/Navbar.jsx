@@ -84,13 +84,16 @@ const Navbar = ({ isHomePage }) => {
               <div className="hidden md:block">
                 <div className="ml-10 flex space-x-5 lg:space-x-[57px]">
                   <div className="each-item pt-3">
-                    <Link
-                      to="/about-us"
-                      onClick={scrollToTop}
+                    <a
+                      href="aboutus"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        document.getElementById('aboutus')?.scrollIntoView({ behavior: 'smooth' });
+                      }}
                       className="hover:text-green-400 no-underline hover:no-underline cursor-pointer text-md font-normal"
                     >
                       About Us
-                    </Link>
+                    </a>
                   </div>
                   <div className="each-item">
                     <Link
@@ -129,12 +132,16 @@ const Navbar = ({ isHomePage }) => {
                     </Link>
                   </div>
                   <div className="each-item pt-3">
-                    <Link
-                      to="/contact-us"
+                    <a
+                      href="#contactus"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        document.getElementById('contactus')?.scrollIntoView({ behavior: 'smooth' });
+                      }}
                       className="hover:text-green-400 no-underline hover:no-underline cursor-pointer text-md font-normal"
                     >
                       Contact Us
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </div>

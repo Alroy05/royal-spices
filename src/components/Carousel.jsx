@@ -4,51 +4,51 @@ import { motion } from 'framer-motion';
 const products = [
   {
     id: 1,
-    name: 'Turmeric',
-    description: 'A vibrant spice known for its anti-inflammatory properties.',
-    image: 'https://tildaricelive.s3.eu-central-1.amazonaws.com/wp-content/uploads/sites/21/2022/01/26111346/Tumeric-1-min.jpg'
+    name: 'Spices',
+    description: 'Aromatic seasonings to enhance flavors in your dishes.',
+    image: 'https://t4.ftcdn.net/jpg/01/02/58/91/360_F_102589163_hk02O92vzEYP0rZbVyvDTbkje1GaUDk1.jpg'
   },
   {
     id: 2,
-    name: 'Cumin',
-    description: 'A spice with a warm, earthy flavor perfect for savory dishes.',
-    image: 'https://cdn.britannica.com/59/219359-050-662D86EA/Cumin-Spice.jpg'
+    name: 'Pulses and Grains',
+    description: 'Staple foods rich in protein and fiber for a balanced diet.',
+    image: 'https://5.imimg.com/data5/SELLER/Default/2021/6/YD/QW/PR/16624432/pulses-and-grains.jpg'
   },
   {
     id: 3,
-    name: 'Coriander',
-    description: 'A fresh and citrusy spice used in various global cuisines.',
-    image: 'https://m.media-amazon.com/images/I/41oCRXEnZQL._AC_UF1000,1000_QL80_.jpg'
+    name: 'Oil Seeds',
+    description: 'Nutrient-rich seeds used for oil extraction and cooking.',
+    image: 'https://img1.exportersindia.com/product_images/bc-full/dir_148/4428190/oil-seeds-1529063343-3983958.jpeg'
   },
   {
     id: 4,
-    name: 'Clove',
-    description: 'A strong, pungent spice with a sweet aftertaste.',
-    image: 'https://cdn.britannica.com/27/171027-050-7F7889C9/flower-buds-clove-tree.jpg'
+    name: 'Dry Fruits',
+    description: 'Natural snacks packed with vitamins and minerals.',
+    image: 'https://kumaribasket.com/wp-content/uploads/2022/07/393497851-H-scaled.jpg'
   },
   {
     id: 5,
-    name: 'Cardamom',
-    description: 'A sweet, aromatic spice used in both sweet and savory dishes.',
-    image: 'https://5.imimg.com/data5/SELLER/Default/2021/11/LS/HX/PE/140961756/cardamon.jpg'
+    name: 'Food Products',
+    description: 'Ready-to-use ingredients to simplify your cooking process.',
+    image: 'https://i.pinimg.com/736x/ea/4e/5f/ea4e5fffcebbfff13509eec210d99771.jpg'
   },
   {
     id: 6,
-    name: 'Black Pepper',
-    description: 'A spicy, bold pepper perfect for adding heat to any dish.',
-    image: 'https://cdn.shopaccino.com/edible-smart/products/black-pepper--kali-mirch-379942_l.jpg?v=521'
+    name: 'Herbs',
+    description: 'Fresh and dried herbs to add flavor and aroma to your meals.',
+    image: 'https://assets.epicurious.com/photos/661820a17af12b050e92c390/16:9/w_2580,c_limit/Fresh-Herbs_HERO_040424_3581.jpg'
   },
   {
     id: 7,
     name: 'Fenugreek',
     description: 'A slightly bitter spice with a maple-like flavor.',
-    image: 'https://organicbazar.net/cdn/shop/products/Untitled-design-2022-06-02T160309.044.jpg?v=1694167783'
+    image: 'https://d2jx2rerrg6sh3.cloudfront.net/images/news/ImageForNews_772967_1709086156673855.jpg'
   },
   {
     id: 8,
     name: 'Mustard Seeds',
     description: 'Small seeds that add a warm, nutty flavor to dishes.',
-    image: 'https://m.media-amazon.com/images/I/71+MmuGNG-L._AC_UF1000,1000_QL80_.jpg'
+    image: 'https://m.media-amazon.com/images/I/71+MmuGNG-L.jpg'
   }
 ];
 
@@ -56,22 +56,22 @@ const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoScroll, setIsAutoScroll] = useState(false);
   const containerRef = useRef(null);
-  const [cardWidth, setCardWidth] = useState(0);
-
-  // Calculate the width of each card
-  useEffect(() => {
-    if (containerRef.current) {
-      const width = containerRef.current.clientWidth / 4; // Assuming 4 items per view in larger screens
-      setCardWidth(width);
-    }
-  }, [containerRef]);
+  const [itemsPerView, setItemsPerView] = useState(4);
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 768) {
-        setIsAutoScroll(true); // Auto-scroll on larger screens (e.g., tablets and desktops)
+      if (window.innerWidth >= 1024) {
+        setItemsPerView(4);
+        setIsAutoScroll(true);
+      } else if (window.innerWidth >= 768) {
+        setItemsPerView(3);
+        setIsAutoScroll(true);
+      } else if (window.innerWidth >= 640) {
+        setItemsPerView(2);
+        setIsAutoScroll(false);
       } else {
-        setIsAutoScroll(false); // No auto-scroll on mobile
+        setItemsPerView(1);
+        setIsAutoScroll(false);
       }
     };
 
@@ -88,42 +88,41 @@ const Carousel = () => {
     if (isAutoScroll) {
       interval = setInterval(() => {
         nextSlide();
-      }, 2500); // Auto-scroll every 2.5 seconds
+      }, 3000);
     }
     return () => clearInterval(interval);
   }, [isAutoScroll, currentIndex]);
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % products.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % (products.length - itemsPerView + 1));
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + products.length) % products.length);
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + products.length - itemsPerView + 1) % (products.length - itemsPerView + 1));
   };
 
   return (
     <div className="bg-slate-50 py-16 px-4 sm:px-6 lg:px-8 font-sans min-h-screen">
       <div className="max-w-7xl mx-auto">
-        <motion.h2
-          className="text-3xl font-bold font-playfairDisplay text-green-950 sm:text-4xl text-center mb-12"
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          Featured Products
-        </motion.h2>
+        <h2 className="text-3xl font-bold font-serif text-green-950 sm:text-4xl text-center mb-12">
+          Our Products
+        </h2>
 
         <div className="relative overflow-hidden">
           <motion.div
-            ref={containerRef} // Reference for the container
+            ref={containerRef}
             className="flex"
-            animate={{ x: `${-currentIndex * cardWidth}px` }} // Slide by card width
-            transition={{ type: 'tween', ease: 'linear', duration: 0.5 }}
+            animate={{ x: `${-currentIndex * (100 / itemsPerView)}%` }}
+            transition={{ type: 'tween', ease: 'easeInOut', duration: 0.5 }}
           >
-            {products.map((product, index) => (
+            {products.map((product) => (
               <div 
-                key={`${product.id}-${index}`}
-                className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 flex-shrink-0 px-2"
+                key={product.id}
+                className={`flex-shrink-0 px-2 ${
+                  itemsPerView === 4 ? 'w-1/4' :
+                  itemsPerView === 3 ? 'w-1/3' :
+                  itemsPerView === 2 ? 'w-1/2' : 'w-full'
+                }`}
               >
                 <div className="bg-white rounded-lg shadow-lg overflow-hidden">
                   <img
@@ -132,7 +131,7 @@ const Carousel = () => {
                     className="h-48 w-full object-cover"
                   />
                   <div className="p-4">
-                    <h3 className="text-xl font-bold text-green-950 font-playfairDisplay">{product.name}</h3>
+                    <h3 className="text-xl font-bold text-green-950 font-serif">{product.name}</h3>
                     <p className="text-gray-600 mt-2 italic">{product.description}</p>
                     <button className="mt-4 px-4 py-2 border border-green-950 rounded-full hover:bg-white hover:text-green-950 text-sm bg-green-950 text-white transition-colors">
                       Read More
@@ -143,7 +142,6 @@ const Carousel = () => {
             ))}
           </motion.div>
 
-          {/* Arrows */}
           <button
             onClick={prevSlide}
             className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors z-10"
@@ -152,16 +150,14 @@ const Carousel = () => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <button
             onClick={nextSlide}
             className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors z-10"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
-          </motion.button>
+          </button>
         </div>
       </div>
     </div>
