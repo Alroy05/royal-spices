@@ -25,7 +25,7 @@ const Articles = () => {
         {/* sticky sidebar */}
         <aside className="hidden md:w-1/3 lg:w-1/4 md:block h-screen sticky top-20">
           <div className="flex flex-col gap-2 p-2 border rounded-xl overflow-y-auto">
-            <Link to="/" className="items-center px-3 py-1 font-semibold hover:bg-green-100 rounded-md">
+            <Link to="/" className="items-center text-start px-3 py-1 font-semibold hover:bg-green-100 rounded-md">
               Home
             </Link>
             <div className="flex flex-col">

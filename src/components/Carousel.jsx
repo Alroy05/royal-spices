@@ -133,9 +133,12 @@ const Carousel = () => {
                   <div className="p-4">
                     <h3 className="text-xl font-bold text-green-950 font-serif">{product.name}</h3>
                     <p className="text-gray-600 mt-2 italic">{product.description}</p>
-                    <button className="mt-4 px-4 py-2 border border-green-950 rounded-full hover:bg-white hover:text-green-950 text-sm bg-green-950 text-white transition-colors">
+                    <motion.button className="mt-4 px-4 py-2 border border-green-950 rounded-full hover:bg-green-900 hover:text-white text-sm bg-green-950 text-white transition-colors duration-300"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    >
                       Read More
-                    </button>
+                    </motion.button>
                   </div>
                 </div>
               </div>

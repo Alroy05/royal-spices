@@ -32,7 +32,7 @@ const TestimonialCard = ({ name, image, quote }) => (
       </svg>
     <blockquote className="relative">
       {/* Adding quotation marks */}
-      <p className="text-lg tracking-tight text-slate-900 italic">
+      <p className="text-lg text-end tracking-tight text-slate-900 italic">
         “{quote}”
       </p>
     </blockquote>
